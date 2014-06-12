@@ -1,0 +1,21 @@
+div.signup-form(ng-class='{submitted : submit.register}')
+	form.form-horizontal(name='signupForm', role='form', ng-submit='signup()', novalidate)
+		.form-group
+		    label.control-label(for='inputName') שם
+		    input#inputName.form-control(name='name', type='text', placeholder='Name', ng-model='signupFormData.name', required)
+		    div.error.label(ng-show='signupForm.name.$invalid && !signupForm.name.$pristine') Name is required
+		  .form-group
+		    label.control-label(for='inputUsername') שם משתמש
+		    input#inputUsername.form-control(name='username', type='text', placeholder='Username', ng-model='signupFormData.username', required)
+		    div.error.label(ng-show='signupForm.username.$invalid && !signupForm.username.$pristine') Username is required
+		  .form-group
+		    label.col-sm-4.control-label(for='inputPassword') סיסמא
+		    input#inputPassword.form-control(name='password', type='password', placeholder='Password', ng-model='signupFormData.password', required, equals='{{signupFormData.passwordConfirmation}}',ng-minlength='5')
+		    div.error.label(ng-show='signupForm.password.$error.required && !signupForm.password.$pristine') Password is required
+		    div.error.label(ng-show='signupForm.password.$error.minlength && !signupForm.password.$pristine') Password minimum length is 5
+		  .form-group
+		    label.control-label(for='inputPasswordConfirmation') אישור סיסמא
+	    	input#inputPasswordConfirmation.form-control(name='passwordConfirmation', type='password', placeholder='Password', ng-model='signupFormData.passwordConfirmation', required, equals='{{signupFormData.password}}', ng-minlength='5')        
+		    div.error.label(ng-show='signupForm.passwordConfirmation.$error.equals && !signupForm.passwordConfirmation.$pristine') Passwords does not match      
+		  .form-group		    
+		      button.btn.btn-default(type='submit') Register	  

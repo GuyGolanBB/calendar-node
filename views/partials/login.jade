@@ -1,0 +1,12 @@
+div.login-form(ng-class='submitted && (loginForm.username.$invalid || loginForm.username.$invalid)')
+  form.form-horizontal(role='form', name='loginForm', ng-submit='login()', novalidate)
+    .form-group
+        label.control-label(for='inputUsername') שם משתמש:        
+        input#inputUsername.form-control(name='username', ng-model='loginFormData.username', type='text', required)
+        span.error(ng-show='submitted && loginForm.username.$error.required') אנא הכנס שם משתמש
+      .form-group
+        label.control-label(for='inputPassword') סיסמא        
+        input#inputPassword.form-control(name='password', ng-model='loginFormData.password', type='password', required)
+        span.error(ng-show='submitted && loginForm.password.$error.required') אנא הכנס סיסמא
+      .form-group      
+        button.btn.btn-success(type='submit',ng-click='submitted="true"') הכנס

@@ -1,0 +1,10 @@
+div(ng-controller='TechnicianCtrl')
+    .technician_container
+        .technician(ng-repeat='technician in technicians')
+          .details
+            .name {{technician.name}}
+            .phone {{technician.phone}}
+          .appointment(ng-repeat='appointment in technician.appointments', ng-click='updateAppointment(appointment)')
+            .client_details {{appointment.client.cIndex}} - {{appointment.client.name}}
+            .appointment_details
+              | {{appointment.startTime | date : 'dd/MM/yyyy HH:mm'}} - {{appointment.endTime | date : 'dd/MM/yyyy HH:mm'}}

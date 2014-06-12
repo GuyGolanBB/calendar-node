@@ -1,0 +1,22 @@
+{
+  "name": "application-name",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "async": "^0.9.0",
+    "bcrypt-nodejs": "latest",
+    "body-parser": "latest",
+    "connect-flash": "latest",
+    "connect-redis": "^2.0.0",
+    "cookie-parser": "latest",
+    "error-handler": "latest",
+    "express": "latest",
+    "express-session": "latest",
+    "jade": "latest",
+    "method-override": "^2.0.2",
+    "mongoose": "latest",
+    "morgan": "latest",
+    "passport": "latest",
+    "passport-local": "latest"
+  }
+}

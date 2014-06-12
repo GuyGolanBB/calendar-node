@@ -1,0 +1,55 @@
+div#appointment-form
+      form(name='appointmentForm', ng-submit='createAppointment(appointmentForm.$valid)', ng-class='{submitted : submitted}', novalidate='novalidate')
+        div.modal-header
+          h3.modal-title פגישה חדשה
+        div.modal-body                  
+          input.form-control(type='hidden', required='required', name='startTime', ng-model='formData.startTime')
+          input.form-control(type='hidden', required='required', name='endTime', ng-model='formData.endTime')  
+          .form-group          
+            div.selectClient
+              label לקוח:
+              input.form-control(type='text', name='client', required='required', ng-model='formData.client', typeahead='client._id as client.cIndex for client in getClients($viewValue)', typeahead-input-formatter='formatLabel($model)',typeahead-editable='false')
+            div.selectStatus
+              label סטטוס:
+              select#statusSelect.form-control(name='status', required='required', ng-model='formData.status', ng-options='status._id as status.name for status in statusList')
+            div.selectJobType
+              label סוג עבודה:
+              select.form-control(name='jobType', required='required', ng-model='formData.jobType', ng-options='jobType._id as jobType.name for jobType in jobTypes')        
+          .form-group
+            label טכנאים:
+              select.form-control.select-technicians(multiple='multiple', name='technicians', required='required', ng-multiple='	true', ng-model='formData.technicians', ng-options='tech._id as tech.name for tech in technicians')
+          .form-group  
+            div.startDate
+              label זמן התחלה:
+              .dropdown.select-date
+                a#startTime.dropdown-toggle(role='button', data-toggle='dropdown', data-target='#')
+                  .form-control(name='displayStartTime', ng-class='{"ng-invalid" : submitted&& appointmentForm.startTime.$invalid}') {{formData.displayStartTime | date:'dd/MM/yyyy HH:mm'}}
+                ul.dropdown-menu(role='menu', aria-labelledby='dLabel')
+                  datetimepicker(data-ng-model='formData.startTime', data-on-set-time='validateStartTime', data-datetimepicker-config='{ dropdownSelector: "#startTime", language : "he" }')                        
+            div.endDate
+              label זמן סיום:
+              .dropdown.select-date
+                a#endTime.dropdown-toggle(role='button', data-toggle='dropdown', data-target='#')
+                  .form-control(name='displayEndTime', ng-class='{"ng-invalid" : submitted && appointmentForm.endTime.$invalid}') {{formData.displayEndTime | date:'dd/MM/yyyy HH:mm'}}
+                ul.dropdown-menu(role='menu', aria-labelledby='dLabel')
+                  datetimepicker(data-ng-model='formData.endTime', data-on-set-time='validateEndTime', data-datetimepicker-config='{ dropdownSelector: "#endTime",language : "he" }')
+          .form-group
+            label בעיה:
+            textarea.form-control(name='problem', required='required', ng-model='formData.problem')
+          .form-group
+            div.smsInput
+              label SMS
+              input#smsInput(name='sms', type='checkbox', ng-model='formData.sms')
+              label(for='smsInput')
+            div.approveInput
+              label אישור
+              input#approveInput(name='sms', type='checkbox', ng-model='formData.approve')            
+              label(for='approveInput')
+          .form-group
+            label אחר:
+            textarea.form-control(name='notes', ng-model='formData.notes')
+        div.modal-footer
+          button.btn.btn-success(type='submit') {{formData._id ? 'עדכן' : 'שמור'}}
+          button.btn.btn-warning.reset(type='reset', ng-click='reset()') אפס
+          button.btn.btn-danger.pull-left(type='button', ng-click='cancel()') בטל
+        
