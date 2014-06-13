@@ -213,3 +213,5 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+redis/RedisQFork_15536.dat
+redis/dump.rdb

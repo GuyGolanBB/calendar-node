@@ -79,6 +79,12 @@ input[type=checkbox]:checked + label {
   width:600px;
 }
 
+/*SIGNUP PAGE*/
+.signup-form {
+  margin:250px auto;
+  width:600px;
+}
+
 /*APPOINTMENT FORM*/
 .startDate, .endDate {  
   width: calc(100% / 2 - 13px);

@@ -107,11 +107,7 @@ angular.module('myApp.controllers', []).
     $scope.technicians = Technicians.query();
     $scope.statusList = Status.query();
     $scope.jobTypes = JobTypes.query();
-    
-    $scope.formData.startTime = new Date();
-    $scope.formData.displayStartTime = $scope.formData.startTime;
-    $scope.formData.endTime = new Date($scope.formData.startTime.getTime() + (2*1000*60*60));
-    $scope.formData.displayEndTime = $scope.formData.endTime;   
+
 
     if (!$filter('isEmptyObject')(formData)) {
       $scope.formData = formData;
@@ -119,10 +115,16 @@ angular.module('myApp.controllers', []).
       $scope.clients.push($scope.formData.client);   
       $scope.formData.client = formData.client._id;           
       $scope.formData.displayStartTime = formData.startTime;
-      $scope.formData.displayEndTime = formData.endTime;
-      
-      
-    }
+      $scope.formData.displayEndTime = formData.endTime;        
+    } else {
+      $scope.formData.startTime = new Date();
+      $scope.formData.displayStartTime = $scope.formData.startTime;
+      $scope.formData.endTime = new Date($scope.formData.startTime.getTime() + (2*1000*60*60));
+      $scope.formData.displayEndTime = $scope.formData.endTime;
+      $scope.clients = [];
+    }    
+    
+
     $scope.createAppointment = function(isValid) {
 
       $scope.submitted = true;
@@ -153,8 +155,7 @@ angular.module('myApp.controllers', []).
     $scope.deleteAppointment = function(appointment) {
       Appointments.delete({},{_id : appointment._id});
     };
-  
-    $scope.clients= [];
+      
     $scope.getClients = function(val) {
       return ClientsAutocomplete.getClients(val).then(function(data){     
         $scope.clients = [];
